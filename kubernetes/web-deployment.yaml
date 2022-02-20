@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web
+  namespace: app
+spec:
+  selector:
+    matchLabels:
+      run: web
+  template:
+    metadata:
+      labels:
+        run: web
+    spec:
+      containers:
+      - image: us-west1-docker.pkg.dev/avid-factor-348420/mdc-image-repository/mdc:0.4.0
+        imagePullPolicy: IfNotPresent
+        name: web
+        envFrom:
+          - secretRef:
+              name: app-secret
+        ports:
+        - containerPort: 8000
+          protocol: TCP

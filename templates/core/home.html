@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset='utf-8'/>
+    {% include "bootstrap.html" %}
+    {% load static %}
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.css">
+  </head>
+  <body>
+    <script src="{% static 'js/app.js' %}"></script>
+    <div id='calendar'></div>
+    <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Add Event</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="mb-3">
+                <label for="eventTitle" class="form-label">Title</label>
+                <input type="text" class="form-control" id="eventTitle">
+              </div>
+              <div class="mb-3">
+                <label for="startTime" class="form-label">Start</label>
+                <input type="datetime-local" class="form-control" id="startTime">
+              </div>
+              <div class="mb-3" id="endTimeDiv">
+                <label for="endTime" class="form-label">End</label>
+                <input type="datetime-local" class="form-control" id="endTime">
+              </div>
+              <div class="mb-3 form-check" id="makeRecurringDiv">
+                <input type="checkbox" class="form-check-input" id="makeRecurring">
+                <label class="form-check-label" for="makeRecurring">Recurring</label>
+              </div>
+              <div class="mb-3" style="display:none;" id="daysOfWeek">
+                <label for="daysOfWeek" class="form-label">Days of Week</label>
+                  <br>
+                  <div>
+                    <label for="sunday" class="form-label">Sunday</label>
+                    <input type="checkbox" class="form-check-input" id="sunday">
+                  </div>
+                  <div>
+                    <label for="monday" class="form-label">Monday</label>
+                    <input type="checkbox" class="form-check-input" id="monday">
+                  </div>
+                  <div>
+                    <label for="tuesday" class="form-label">Tuesday</label>
+                    <input type="checkbox" class="form-check-input" id="tuesday">
+                  </div>
+                  <div>
+                    <label for="wednesday" class="form-label">Wednesday</label>
+                    <input type="checkbox" class="form-check-input" id="wednesday">
+                  </div>
+                  <div>
+                    <label for="thursday" class="form-label">Thursday</label>
+                    <input type="checkbox" class="form-check-input" id="thursday">
+                  </div>
+                  <div>
+                    <label for="friday" class="form-label">Friday</label>
+                    <input type="checkbox" class="form-check-input" id="friday">
+                  </div>
+                  <div>
+                    <label for="saturday" class="form-label">Saturday</label>
+                    <input type="checkbox" class="form-check-input" id="saturday">
+                  </div>
+              </div>
+              <div class="mb-3 form-check" id="allDayDiv">
+                <input type="checkbox" class="form-check-input" id="allDay">
+                <label class="form-check-label" for="allDay">All Day</label>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer" id="modalFooter">
+            <button type="button" id="deleteButton" class="btn btn-danger">Delete</button>
+            <button type="button" id="submitButton" class="btn btn-primary">Submit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,6 @@
+[dD]ocker*
+*.env
+*.md
+.[gd]*
+terraform/
+kubernetes/

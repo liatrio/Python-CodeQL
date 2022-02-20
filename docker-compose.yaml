@@ -1,0 +1,23 @@
+services:
+  db:
+    image: postgres
+    volumes:
+      - postgresql:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    environment:
+      - POSTGRES_HOSTNAME=db
+      - DJANGO_SECRET_KEY=
+    depends_on:
+      - db
+
+volumes:
+  postgresql:
