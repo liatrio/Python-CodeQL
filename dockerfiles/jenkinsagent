@@ -7,5 +7,7 @@ RUN curl -L -O https://github.com/github/codeql-action/releases/latest/download/
 && mkdir -p /codeql-dbs/example-repo-multi
 ENV PATH /opt/codeql:$PATH
 
+RUN apk add openjdk11
+
 ENTRYPOINT /bin/sh
 
