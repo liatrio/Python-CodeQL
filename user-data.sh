@@ -9,7 +9,7 @@ exec > >(tee /var/log/user-data.log|logger -t user-data -s 2>/dev/console) 2>&1
   apt -y install openjdk-11-jre
   apt -y install jenkins
 
-  apt install \
+  apt -y install \
     ca-certificates \
     curl \
     gnupg \
@@ -19,8 +19,8 @@ exec > >(tee /var/log/user-data.log|logger -t user-data -s 2>/dev/console) 2>&1
   echo \
   "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
   $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-  apt update
-  apt install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+  apt -y update
+  apt -y install docker-ce docker-ce-cli containerd.io docker-compose-plugin
 
   usermod -aG docker jenkins
 
