@@ -1,7 +1,4 @@
 pipeline {
-	agent {
-		label "python-codeql"
-	}
 	environment {
 		GITHUB_PAT = credentials('github-pat')
 	}
@@ -9,7 +6,6 @@ pipeline {
 	stages {
 		stage('CodeQL Scan') {
 			steps {
-				container("agent") {
 					sh '''
 						codeql database create /codeql-dbs/example-repo-multi --db-cluster --language javascript,python --overwrite
 						for language in javascript python; do
@@ -17,7 +13,6 @@ pipeline {
 							--format=sarif-latest --output="/tmp/example-repo-$language.sarif"
 						done
 					'''
-				}
 			}
 		}
 
@@ -29,13 +24,11 @@ pipeline {
 			}
 
 			steps {
-				container("agent") {
 					sh '''
 						for language in javascript python; do
 							echo $GITHUB_PAT | codeql github upload-results --sarif="/tmp/example-repo-$language.sarif" --github-auth-stdin -f=refs/heads/${CHANGE_BRANCH}
 						done
 					'''
-				}
 			}
 		}
 
@@ -45,22 +38,18 @@ pipeline {
 			}
 
 			steps {
-				container("agent") {
 					sh '''
 						for language in javascript python; do
 							echo $GITHUB_PAT | codeql github upload-results --sarif="/tmp/example-repo-$language.sarif" --github-auth-stdin -f=refs/heads/main
 						done
 					'''
-				}
 			}
 		}
 		stage('Build') {
 			steps {
-				container("agent") {
 					sh '''
 						docker build --file dockerfiles/app . -t mdc:latest
 					'''
-				}
 			}
 		}
 	}
