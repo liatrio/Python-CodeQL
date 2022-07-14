@@ -1,0 +1,11 @@
+FROM python:alpine
+
+RUN curl -L -O https://github.com/github/codeql-action/releases/latest/download/codeql-bundle-linux64.tar.gz \
+&& tar -xvzf ./codeql-bundle-linux64.tar.gz \
+&& mv codeql /opt \
+&& rm codeql-bundle-linux64.tar.gz \
+&& mkdir -p /codeql-dbs/example-repo-multi
+ENV PATH /opt/codeql:$PATH
+
+ENTRYPOINT /bin/sh
+
