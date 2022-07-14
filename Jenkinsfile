@@ -1,4 +1,7 @@
 pipeline {
+        agent { 
+                label "python-codeql"
+        }
 	environment {
 		GITHUB_PAT = credentials('github-pat')
 	}
